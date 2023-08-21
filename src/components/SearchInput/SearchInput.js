@@ -21,7 +21,7 @@ const SearchInput = (props) => {
 
 const Wrapper = styled.div`
   position: relative;
-  min-width: 300px;
+  min-width: 10vw;
   height: 2em;
 `;
 

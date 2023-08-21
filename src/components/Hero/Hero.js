@@ -1,11 +1,12 @@
 import React from 'react';
 import styled from 'styled-components/macro';
+import {getSrcSets} from "../../utils";
 
 const Hero = () => {
   return (
     <Wrapper>
-      <HeroImage src="/images/hero-img.jpg" />
-      <Swoop src="/swoop.svg" />
+      <HeroPicture src="/images/hero-img.jpg" alt="Photo of the current hero" />
+      <Swoop src="/swoop.svg" alt=""/>
     </Wrapper>
   );
 };
@@ -20,11 +21,17 @@ const Wrapper = styled.section`
   background: hsl(0deg 0% 1%);
 `;
 
+const HeroPicture = ({src}) => {
+    const srcSets = getSrcSets(src);
+    return <picture>
+        {srcSets.map((srcSet, index) => (<source srcSet={srcSet} key={index}/>))}
+        <HeroImage src={src}/></picture>;
+}
+
+
 const HeroImage = styled.img`
   display: block;
-  width: 500px;
-  height: 500px;
-  max-height: 100%;
+  width: min(500px, 100vw);
 `;
 
 const Swoop = styled.img`
@@ -37,6 +44,7 @@ const Swoop = styled.img`
   */
   bottom: -2px;
   width: 100%;
+  object-fit: cover;
 `;
 
 export default Hero;
